@@ -1,0 +1,75 @@
+﻿<Window x:Class="PrimaryFlightDisplay.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:local="clr-namespace:PrimaryFlightDisplay"
+        mc:Ignorable="d"
+        Title="Primary Flight Display" Height="700" Width="1050" DataContext="{StaticResource MainController}" Loaded="Window_Loaded">
+    <Grid Background="LightGray">
+        <Grid Margin="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Viewbox Stretch="UniformToFill" Margin="4">
+                <Canvas Background="Black" ClipToBounds="True" Width="{x:Static local:Globals.PFDHeight}" Height="{x:Static local:Globals.PFDHeight}">
+                    <ItemsControl ItemsSource="{Binding PFDLayers}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <Canvas/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </Canvas>
+            </Viewbox>
+            <StackPanel Grid.Column="1">
+                <GroupBox Margin="4" Header="Layers">
+                    <StackPanel Margin="4">
+                        <CheckBox Margin="4" Content="Sky + Ground" IsChecked="{Binding SkyGround}"/>
+                        <CheckBox Margin="4" Content="Pitch Scale" IsChecked="{Binding PitchScale}"/>
+                        <CheckBox Margin="4" Content="Clip Pitch" IsChecked="{Binding PitchClip}"/>
+                        <CheckBox Margin="4" Content="Opacity Mask" IsChecked="{Binding OpacityMask}"/>
+                        <CheckBox Margin="4" Content="Roll Scale" IsChecked="{Binding RollScale}"/>
+                        <CheckBox Margin="4" Content="Indicator" IsChecked="{Binding Indicator}"/>
+                    </StackPanel>
+                </GroupBox>
+                <GroupBox Margin="4" Header="Parameters">
+
+                    <Grid Margin="4">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="96"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Grid.Row="0" Grid.Column="0" Margin="4" Text="Pitch"/>
+                        <TextBlock Grid.Row="1" Grid.Column="0" Margin="4" Text="Roll"/>
+                        <TextBlock Grid.Row="2" Grid.Column="0" Margin="4" Text="IAS"/>
+                        <TextBlock Grid.Row="3" Grid.Column="0" Margin="4" Text="Altitude"/>
+                        <TextBlock Grid.Row="4" Grid.Column="0" Margin="4" Text="Heading"/>
+
+                        <Slider Grid.Row="0" Grid.Column="1" Margin="4" Minimum="{x:Static local:Globals.PitchMin}" Maximum="{x:Static local:Globals.PitchMax}" Value="{Binding Pitch}" />
+                        <Slider Grid.Row="1" Grid.Column="1" Margin="4" Minimum="{x:Static local:Globals.RollMin}" Maximum="{x:Static local:Globals.RollMax}" Value="{Binding Roll}" />
+                        <Slider Grid.Row="2" Grid.Column="1" Margin="4" Minimum="{x:Static local:Globals.AltitudeMin}" Maximum="{x:Static local:Globals.AltitudeMax}" Value="{Binding Altitude}"/>
+                        <Slider Grid.Row="3" Grid.Column="1" Margin="4" Minimum="{x:Static local:Globals.IASMin}" Maximum="{x:Static local:Globals.IASMax}" Value="{Binding IAS}"/>
+                        <Slider Grid.Row="4" Grid.Column="1" Margin="4" Minimum="{x:Static local:Globals.HeadingMin}" Maximum="{x:Static local:Globals.HeadingMax}" Value="{Binding Heading}"/>
+
+                        <TextBox Grid.Row="0" Grid.Column="2" Margin="4" TextAlignment="Center" Text="{Binding Pitch, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Row="1" Grid.Column="2" Margin="4" TextAlignment="Center" Text="{Binding Roll, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Row="2" Grid.Column="2" Margin="4" TextAlignment="Center" Text="{Binding Altitude, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Row="3" Grid.Column="2" Margin="4" TextAlignment="Center" Text="{Binding IAS, UpdateSourceTrigger=PropertyChanged}"/>
+                        <TextBox Grid.Row="4" Grid.Column="2" Margin="4" TextAlignment="Center" Text="{Binding Heading, UpdateSourceTrigger=PropertyChanged}"/>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

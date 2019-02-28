@@ -1,0 +1,15 @@
+﻿<Application x:Class="PrimaryFlightDisplay.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PrimaryFlightDisplay"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <local:MainController x:Key="MainController"/>
+
+        <BitmapImage x:Key="PitchIndicatorImage" UriSource="Images\pitch_indicator.png"/>
+        <BitmapImage x:Key="PitchOpacityMaskImage" UriSource="Images\pitch_opacity_mask.png"/>
+        <BitmapImage x:Key="PitchScaleImage" UriSource="Images\pitch_scale.png"/>
+        <BitmapImage x:Key="RollIndicatorImage" UriSource="Images\roll_indicator.png"/>
+        <BitmapImage x:Key="RollScaleImage" UriSource="Images\roll_scale.png"/>               
+    </Application.Resources>
+</Application>
